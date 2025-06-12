@@ -16,7 +16,7 @@ const Sidebar = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) 
         <div
             id="sidebar-backdrop"
             onClick={handleBackdropClick}
-            className="fixed inset-0 z-40 bg-black/50 backdrop-blur-xm md:hidden"
+            className="fixed inset-0 z-40 bg-black/50 md:hidden"
         >
             <div
                 className={clsx(

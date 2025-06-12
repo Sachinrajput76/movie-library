@@ -1,22 +1,16 @@
 "use client";
 
+import MovieCard from "@/components/MovieCard";
+import Pagination from "@/components/Pagination";
 import SearchBar from "@/components/SearchBar";
-import { useState } from "react";
+import { buildSearchUrl } from "@/utils/api";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { buildSearchUrl } from "@/utils/api";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store";
-import { addFavorite, removeFavorite } from "@/store/favoritesSlice";
-import Pagination from "@/components/Pagination";
-import MovieCard from "@/components/MovieCard";
+import { useState } from "react";
 
 export default function Home() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState("Avengers");
   const [page, setPage] = useState(1); // ✅ Pagination state
-
-  const dispatch = useDispatch();
-  const favorites = useSelector((state: RootState) => state.favorites.movies);
 
   const { data, isLoading } = useQuery({
     queryKey: ["movies", searchTerm, page],
@@ -24,14 +18,6 @@ export default function Home() {
       axios.get(buildSearchUrl(searchTerm, page)).then((res) => res.data),
     enabled: !!searchTerm,
   });
-
-  const toggleFavorite = (movie: any) => {
-    const isFav = favorites.some((fav) => fav.imdbID === movie.imdbID);
-    isFav ? dispatch(removeFavorite(movie.imdbID)) : dispatch(addFavorite(movie));
-  };
-
-  const isMovieFavorite = (imdbID: string) =>
-    favorites.some((fav) => fav.imdbID === imdbID);
 
   const totalResults = parseInt(data?.totalResults || "0", 10);
   const totalPages = Math.ceil(totalResults / 10);

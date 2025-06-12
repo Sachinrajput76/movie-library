@@ -1,32 +1,37 @@
 "use client";
-
+import { Menu } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import Sidebar from "./Sidebar";
 
-export default function Header() {
-    const [isOpen, setIsOpen] = useState(false);
+const Header = () => {
+    const [sidebarOpen, setSidebarOpen] = useState(false);
 
     return (
-        <header className="bg-black text-white shadow-md">
-            <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-                <Link href="/" className="text-xl font-bold">
-                    🎬 Movie Library
-                </Link>
-                <button
-                    onClick={() => setIsOpen(!isOpen)}
-                    className="md:hidden text-white"
-                >
-                    ☰
-                </button>
-                <nav className={`md:flex gap-6 ${isOpen ? "block mt-4" : "hidden"} md:mt-0`}>
-                    <Link href="/" className="hover:underline block">
-                        Home
-                    </Link>
-                    <Link href="/favorites" className="hover:underline block">
-                        Favorites
-                    </Link>
+        <>
+            <header className="flex items-center justify-between p-4 shadow-md bg-white">
+                <h1 className="text-xl font-bold">🎬 Movie Library</h1>
+
+                {/* Desktop Nav */}
+                <nav className="hidden md:flex gap-4">
+                    <Link href="/">Home</Link>
+                    <Link href="/favorites">Favorites</Link>
                 </nav>
-            </div>
-        </header>
+
+                {/* Mobile Hamburger */}
+                <button
+                    className="md:hidden"
+                    onClick={() => setSidebarOpen(true)}
+                    aria-label="Open menu"
+                >
+                    <Menu size={28} />
+                </button>
+            </header>
+
+            {/* Sidebar (Mobile Only) */}
+            <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+        </>
     );
-}
+};
+
+export default Header;

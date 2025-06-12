@@ -3,10 +3,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Providers from "./providers";
 import RehydrateFavorites from "@/components/RehydrateFavorites";
-
-import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import Sidebar from "@/components/Sidebar";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,10 +24,7 @@ export default function RootLayout({
         <Providers>
           <RehydrateFavorites />
           <Header />
-          <div className="flex min-h-screen">
-            <Sidebar />
-            <main className="flex-1 p-4">{children}</main>
-          </div>
+          <main className="min-h-screen">{children}</main>
           <Footer />
         </Providers>
       </body>

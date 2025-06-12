@@ -1,9 +1,12 @@
-// src/app/layout.tsx
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Providers from "./providers";
 import RehydrateFavorites from "@/components/RehydrateFavorites";
+
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+import Sidebar from "@/components/Sidebar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +25,12 @@ export default function RootLayout({
       <body className={inter.className}>
         <Providers>
           <RehydrateFavorites />
-          {children}
+          <Header />
+          <div className="flex min-h-screen">
+            <Sidebar />
+            <main className="flex-1 p-4">{children}</main>
+          </div>
+          <Footer />
         </Providers>
       </body>
     </html>

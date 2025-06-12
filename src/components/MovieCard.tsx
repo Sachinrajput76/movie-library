@@ -1,24 +1,11 @@
-"use client";
-
+import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store";
 import { addFavorite, removeFavorite } from "@/store/favoritesSlice";
 
-type Movie = {
-    imdbID: string;
-    Title: string;
-    Year: string;
-    Poster: string;
-};
-
-type MovieCardProps = {
-    movie: Movie;
-};
-
-const MovieCard = ({ movie }: MovieCardProps) => {
+const MovieCard = ({ movie }: { movie: any }) => {
     const dispatch = useDispatch();
     const favorites = useSelector((state: RootState) => state.favorites.movies);
-
     const isFav = favorites.some((fav) => fav.imdbID === movie.imdbID);
 
     const toggleFavorite = () => {
@@ -29,9 +16,11 @@ const MovieCard = ({ movie }: MovieCardProps) => {
 
     return (
         <div className="bg-white p-2 rounded shadow relative">
-            <img
-                src={movie.Poster}
+            <Image
+                src={movie.Poster !== "N/A" ? movie.Poster : "/fallback.jpg"}
                 alt={movie.Title}
+                width={300}
+                height={450}
                 className="w-full h-64 object-cover rounded"
             />
             <div className="mt-2 text-center">

@@ -4,18 +4,16 @@ import { useEffect, useState } from "react";
 import useDebounce from "@/hooks/useDebounce";
 
 type Props = {
+    initialTerm?: string;
     onSearch: (searchTerm: string) => void;
 };
 
-export default function SearchBar({ onSearch }: Props) {
-    const [search, setSearch] = useState("");
+export default function SearchBar({ onSearch, initialTerm = "" }: Props) {
+    const [search, setSearch] = useState(initialTerm);
     const debounced = useDebounce(search, 500);
 
-    // Notify parent when debounced value changes
     useEffect(() => {
-        if (debounced.trim()) {
-            onSearch(debounced);
-        }
+        onSearch(debounced);
     }, [debounced]);
 
     return (

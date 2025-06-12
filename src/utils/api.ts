@@ -1,3 +1,3 @@
 export const buildSearchUrl = (query: string, page = 1) => {
-    return `/api/movies?search=${encodeURIComponent(query)}&page=${page}`;
-}
+    return `${process.env.NEXT_PUBLIC_BASE_URL}/api/movies?search=${query}&page=${page}`;
+};

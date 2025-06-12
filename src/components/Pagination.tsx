@@ -1,4 +1,3 @@
-// src/components/Pagination.tsx
 "use client";
 
 type PaginationProps = {

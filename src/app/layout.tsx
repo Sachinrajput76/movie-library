@@ -1,7 +1,9 @@
+// src/app/layout.tsx
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Providers from "./providers";
+import RehydrateFavorites from "@/components/RehydrateFavorites";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +20,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Providers>{children}</Providers>
+        <Providers>
+          <RehydrateFavorites />
+          {children}
+        </Providers>
       </body>
     </html>
   );

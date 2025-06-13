@@ -1,16 +1,13 @@
+import { Metadata } from "next";
 import axios from "axios";
 import SearchAndDisplayMovies from "@/components/SearchAndDisplayMovies";
 import { buildSearchUrl } from "@/utils/api";
 import { Film } from "lucide-react";
+import { HomePageProps } from "@/types/movie";
 
-export default async function Home({
-  searchParams,
-}: {
-  searchParams: { find?: string };
-}) {
-  const { find } = searchParams || {};
-  const searchValue = find?.trim() || "Avengers";
-
+export default async function Home({ searchParams }: HomePageProps) {
+  const defaultSearchValue = "Avengers";
+  const searchValue = searchParams?.find?.trim() || defaultSearchValue;
 
   let data = null;
 

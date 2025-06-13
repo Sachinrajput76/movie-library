@@ -41,7 +41,7 @@ const MovieCard = ({ movie }: { movie: any }) => {
                 onClick={toggleFavorite}
                 className={`absolute top-2 right-2 transition-colors cursor-pointer p-1 ${isFav
                     ? "text-red-600 border-red-600"
-                    : "text-white border-gray-300 bg-black/30 hover:border-gray-500"
+                    : "text-white border-gray-300 hover:border-gray-500"
                     }`}
                 title={isFav ? "Remove from favorites" : "Add to favorites"}
             >

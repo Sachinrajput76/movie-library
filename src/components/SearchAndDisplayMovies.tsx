@@ -8,12 +8,28 @@ import SearchBar from "@/components/SearchBar";
 import { buildSearchUrl } from "@/utils/api";
 import { Search } from "lucide-react";
 
-// Lazy-loaded components
+// Dynamic imports with better fallback UI and SSR disabled
 const MovieCard = dynamic(() => import("@/components/MovieCard"), {
-    loading: () => <p className="text-center">Loading movie...</p>,
+    loading: () => (
+        <div className="animate-pulse bg-white p-2 rounded shadow">
+            <div className="w-full h-64 bg-gray-200 rounded mb-2" />
+            <div className="space-y-2 px-2">
+                <div className="h-4 bg-gray-300 rounded w-3/4"></div>
+                <div className="h-4 bg-gray-300 rounded w-1/2"></div>
+                <div className="h-4 bg-gray-300 rounded w-1/3"></div>
+            </div>
+        </div>
+    ),
+    ssr: false,
 });
+
 const Pagination = dynamic(() => import("@/components/Pagination"), {
-    loading: () => <p className="text-center">Loading pagination...</p>,
+    loading: () => (
+        <div className="flex justify-center mt-6">
+            <div className="w-48 h-10 bg-gray-200 animate-pulse rounded" />
+        </div>
+    ),
+    ssr: false,
 });
 
 export default function SearchAndDisplayMovies({ initialData, initialSearchValue }: any) {
@@ -52,7 +68,6 @@ export default function SearchAndDisplayMovies({ initialData, initialSearchValue
                     <p>Search a movie to begin and save it to your favorites.</p>
                 </div>
             )}
-
 
             {!isFetching && shouldFetch && noResults && (
                 <p className="text-center mt-4 text-red-500">No movies found.</p>

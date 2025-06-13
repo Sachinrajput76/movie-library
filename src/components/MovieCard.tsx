@@ -33,7 +33,7 @@ const MovieCard = ({ movie }: { movie: any }) => {
             <button
                 onClick={toggleFavorite}
                 className={clsx(
-                    "absolute top-2 right-2 transition-colors",
+                    "absolute top-2 right-2 transition-colors cursor-pointer",
                     isFav
                         ? "text-red-600 border-red-600"
                         : "text-white border-gray-300 bg-black/30 hover:border-gray-500"

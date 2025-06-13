@@ -3,10 +3,18 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import dynamic from "next/dynamic";
 import SearchBar from "@/components/SearchBar";
-import Pagination from "@/components/Pagination";
-import MovieCard from "@/components/MovieCard";
 import { buildSearchUrl } from "@/utils/api";
+import { Search } from "lucide-react";
+
+// Lazy-loaded components
+const MovieCard = dynamic(() => import("@/components/MovieCard"), {
+    loading: () => <p className="text-center">Loading movie...</p>,
+});
+const Pagination = dynamic(() => import("@/components/Pagination"), {
+    loading: () => <p className="text-center">Loading pagination...</p>,
+});
 
 export default function SearchAndDisplayMovies({ initialData, initialSearchValue }: any) {
     const [searchTerm, setSearchTerm] = useState(initialSearchValue);
@@ -39,10 +47,12 @@ export default function SearchAndDisplayMovies({ initialData, initialSearchValue
             {isFetching && <p className="text-center mt-4">Loading...</p>}
 
             {!isFetching && !shouldFetch && (
-                <p className="text-center mt-4 text-gray-500">
-                    🔍 Search a movie to begin and save it to your favorites.
-                </p>
+                <div className="flex items-center gap-2 justify-center mt-4 text-gray-500">
+                    <Search className="w-5 h-5" />
+                    <p>Search a movie to begin and save it to your favorites.</p>
+                </div>
             )}
+
 
             {!isFetching && shouldFetch && noResults && (
                 <p className="text-center mt-4 text-red-500">No movies found.</p>

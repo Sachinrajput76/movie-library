@@ -2,13 +2,15 @@ import axios from "axios";
 import SearchAndDisplayMovies from "@/components/SearchAndDisplayMovies";
 import { buildSearchUrl } from "@/utils/api";
 import { Film } from "lucide-react";
+
 export default async function Home({
   searchParams,
 }: {
-  searchParams?: { find?: string };
+  searchParams: { find?: string };
 }) {
   const defaultSearchValue = "Avengers";
-  const searchValue = searchParams?.find?.trim() || defaultSearchValue;
+  const { find } = await searchParams|| defaultSearchValue;
+  const searchValue = find || "";
 
   let data = null;
 

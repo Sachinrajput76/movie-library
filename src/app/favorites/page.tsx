@@ -1,7 +1,7 @@
 "use client";
 import { RootState } from "@/store";
 import { removeFavorite } from "@/store/favoritesSlice";
-import { Heart } from "lucide-react";
+import { Film, Heart } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 
 const FavoritesPage = () => {
@@ -17,7 +17,12 @@ const FavoritesPage = () => {
 
     return (
         <main className="max-w-4xl mx-auto p-4">
-            <h1 className="text-3xl font-bold mb-6 text-center">❤️ Favorite Movies</h1>
+            <div className="flex justify-center">
+                <h1 className="flex items-center gap-2 text-xl font-bold mb-4">
+                    <Film />
+                    <span>Favorite Movies</span>
+                </h1>
+            </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                 {favorites.map((movie) => (
                     <div key={movie.imdbID} className="bg-white p-2 rounded shadow relative">

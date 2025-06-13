@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-// useDebounce function to delay search
+// useDebounce custom hook function to delay search
 export default function useDebounce<T>(value: T, delay: number): T {
     const [debouncedValue, setDebouncedValue] = useState(value);
 

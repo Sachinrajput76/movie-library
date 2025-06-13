@@ -1,14 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import dynamic from "next/dynamic";
+import { useRouter, useSearchParams } from "next/navigation";
 import SearchBar from "@/components/SearchBar";
 import { buildSearchUrl } from "@/utils/api";
 import { Search } from "lucide-react";
 
-// Dynamic imports with better fallback UI and SSR disabled
 const MovieCard = dynamic(() => import("@/components/MovieCard"), {
     loading: () => (
         <div className="animate-pulse bg-white p-2 rounded shadow">
@@ -33,10 +33,19 @@ const Pagination = dynamic(() => import("@/components/Pagination"), {
 });
 
 export default function SearchAndDisplayMovies({ initialData, initialSearchValue }: any) {
+    const router = useRouter();
+    const searchParams = useSearchParams();
+
     const [searchTerm, setSearchTerm] = useState(initialSearchValue);
     const [page, setPage] = useState(1);
 
-    const shouldFetch = searchTerm.trim() !== "";
+    const shouldFetch = searchTerm?.trim() !== "";
+
+    useEffect(() => {
+        const params = new URLSearchParams(searchParams.toString());
+        params.set("find", searchTerm);
+        router.push(`/?${params.toString()}`);
+    }, [searchTerm]);
 
     const { data, isFetching } = useQuery({
         queryKey: ["movies", searchTerm, page],

@@ -3,16 +3,34 @@ import SearchAndDisplayMovies from "@/components/SearchAndDisplayMovies";
 import { buildSearchUrl } from "@/utils/api";
 import { Film } from "lucide-react";
 
-export default async function Home() {
-  const defaultSearchValue = "Avengers"; // Default search value
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: { q?: string };
+}) {
+  const defaultSearchValue = "Avengers";
+  const searchValue = searchParams?.q || defaultSearchValue;
+
   let data = null;
 
   try {
-    const response = await axios.get(buildSearchUrl(defaultSearchValue));
+    const response = await axios.get(buildSearchUrl(searchValue));
     data = response.data;
-  } catch (error) {
-    console.error("Error fetching initial data:", error);
-    data = {};
+  } catch (error: any) {
+    console.error("Error fetching initial data:", {
+      message: error?.message,
+      status: error?.response?.status,
+      url: buildSearchUrl(searchValue),
+      data: error?.response?.data,
+    });
+
+    // Provide fallback data to avoid crash
+    data = {
+      Response: "False",
+      Search: [],
+      totalResults: "0",
+      Error: "Failed to load data. Please try again later.",
+    };
   }
 
   return (
@@ -24,8 +42,10 @@ export default async function Home() {
         </h1>
       </div>
 
-      <SearchAndDisplayMovies initialData={data} initialSearchValue={defaultSearchValue} />
+      <SearchAndDisplayMovies
+        initialData={data}
+        initialSearchValue={searchValue}
+      />
     </main>
-
   );
 }

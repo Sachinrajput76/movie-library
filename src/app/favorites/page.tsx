@@ -31,9 +31,16 @@ const FavoritesPage = () => {
                             alt={movie.Title}
                             className="w-full h-64 object-cover rounded"
                         />
-                        <div className="mt-2 text-center">
-                            <h3 className="text-lg font-semibold">{movie.Title}</h3>
-                            <p className="text-sm text-gray-500">{movie.Year}</p>
+                        <div className="mt-2 text-left space-y-1 px-2">
+                            <p className="text-sm text-gray-700">
+                                <span className="font-semibold">Name:</span> {movie.Title}
+                            </p>
+                            <p className="text-sm text-gray-700">
+                                <span className="font-semibold">Rating:</span> {movie?.Rating || "N/A"}
+                            </p>
+                            <p className="text-sm text-gray-700">
+                                <span className="font-semibold">Year:</span> {movie.Year}
+                            </p>
                         </div>
                         <button
                             onClick={() => handleRemove(movie.imdbID)}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import useDebounce from "@/hooks/useDebounce";
 import { X } from "lucide-react";
 
@@ -10,8 +11,15 @@ type Props = {
 };
 
 export default function SearchBar({ onSearch, initialSearchValue = "" }: Props) {
-    const [search, setSearch] = useState(initialSearchValue);
+    const searchParams = useSearchParams();
+    const paramSearchValue = searchParams.get("find") || initialSearchValue;
+
+    const [search, setSearch] = useState(paramSearchValue);
     const debounced = useDebounce(search, 500);
+
+    useEffect(() => {
+        setSearch(paramSearchValue);
+    }, [paramSearchValue]);
 
     useEffect(() => {
         onSearch(debounced);

@@ -4,11 +4,11 @@ import { buildSearchUrl } from "@/utils/api";
 import { Film } from "lucide-react";
 
 export default async function Home() {
-  const defaultTerm = "Avengers";
+  const defaultSearchValue = "Avengers"; // Default search value
   let data = null;
 
   try {
-    const response = await axios.get(buildSearchUrl(defaultTerm));
+    const response = await axios.get(buildSearchUrl(defaultSearchValue));
     data = response.data;
   } catch (error) {
     console.error("Error fetching initial data:", error);
@@ -24,7 +24,7 @@ export default async function Home() {
         </h1>
       </div>
 
-      <MovieSearchClient initialData={data} initialTerm={defaultTerm} />
+      <MovieSearchClient initialData={data} initialSearchValue={defaultSearchValue} />
     </main>
 
   );

@@ -8,8 +8,8 @@ import Pagination from "@/components/Pagination";
 import MovieCard from "@/components/MovieCard";
 import { buildSearchUrl } from "@/utils/api";
 
-export default function MovieSearchClient({ initialData, initialTerm }: any) {
-    const [searchTerm, setSearchTerm] = useState(initialTerm);
+export default function MovieSearchClient({ initialData, initialSearchValue }: any) {
+    const [searchTerm, setSearchTerm] = useState(initialSearchValue);
     const [page, setPage] = useState(1);
 
     const shouldFetch = searchTerm.trim() !== "";
@@ -18,7 +18,7 @@ export default function MovieSearchClient({ initialData, initialTerm }: any) {
         queryKey: ["movies", searchTerm, page],
         queryFn: () =>
             axios.get(buildSearchUrl(searchTerm, page)).then((res) => res.data),
-        initialData: page === 1 && searchTerm === initialTerm ? initialData : undefined,
+        initialData: page === 1 && searchTerm === initialSearchValue ? initialData : undefined,
         enabled: shouldFetch,
     });
 
@@ -29,7 +29,7 @@ export default function MovieSearchClient({ initialData, initialTerm }: any) {
     return (
         <>
             <SearchBar
-                initialTerm={initialTerm}
+                initialSearchValue={initialSearchValue}
                 onSearch={(term) => {
                     setSearchTerm(term);
                     setPage(1);

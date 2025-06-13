@@ -5,12 +5,12 @@ import useDebounce from "@/hooks/useDebounce";
 import { X } from "lucide-react";
 
 type Props = {
-    initialTerm?: string;
+    initialSearchValue?: string;
     onSearch: (searchTerm: string) => void;
 };
 
-export default function SearchBar({ onSearch, initialTerm = "" }: Props) {
-    const [search, setSearch] = useState(initialTerm);
+export default function SearchBar({ onSearch, initialSearchValue = "" }: Props) {
+    const [search, setSearch] = useState(initialSearchValue);
     const debounced = useDebounce(search, 500);
 
     useEffect(() => {

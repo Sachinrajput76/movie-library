@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useAppDispatch } from "@/store";
 import { setFavorites } from "@/store/favoritesSlice";
 
-const RehydrateFavorites = () => {
+const GetFavorites = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -16,4 +16,4 @@ const RehydrateFavorites = () => {
     return null;
 };
 
-export default RehydrateFavorites;
+export default GetFavorites;

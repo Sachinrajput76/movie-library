@@ -2,6 +2,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store";
 import { removeFavorite } from "@/store/favoritesSlice";
+import { Heart } from "lucide-react";
+import clsx from "clsx";
 
 const FavoritesPage = () => {
     const dispatch = useDispatch();
@@ -31,11 +33,15 @@ const FavoritesPage = () => {
                         </div>
                         <button
                             onClick={() => handleRemove(movie.imdbID)}
-                            className="absolute top-2 right-2 text-xl"
-                            title="Remove from favorites"
+                            className={clsx(
+                                "absolute top-2 right-2 transition-colors text-red-600 border-red-600"
+                            )}
+
                         >
-                            ❤️
+                            <Heart fill={"red"} className="w-6 h-6" />
                         </button>
+
+
                     </div>
                 ))}
             </div>

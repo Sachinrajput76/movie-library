@@ -1,5 +1,5 @@
 import axios from "axios";
-import MovieSearchClient from "@/components/MovieSearchClient";
+import SearchAndDisplayMovies from "@/components/SearchAndDisplayMovies";
 import { buildSearchUrl } from "@/utils/api";
 import { Film } from "lucide-react";
 
@@ -24,7 +24,7 @@ export default async function Home() {
         </h1>
       </div>
 
-      <MovieSearchClient initialData={data} initialSearchValue={defaultSearchValue} />
+      <SearchAndDisplayMovies initialData={data} initialSearchValue={defaultSearchValue} />
     </main>
 
   );

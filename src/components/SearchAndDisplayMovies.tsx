@@ -8,7 +8,7 @@ import Pagination from "@/components/Pagination";
 import MovieCard from "@/components/MovieCard";
 import { buildSearchUrl } from "@/utils/api";
 
-export default function MovieSearchClient({ initialData, initialSearchValue }: any) {
+export default function SearchAndDisplayMovies({ initialData, initialSearchValue }: any) {
     const [searchTerm, setSearchTerm] = useState(initialSearchValue);
     const [page, setPage] = useState(1);
 

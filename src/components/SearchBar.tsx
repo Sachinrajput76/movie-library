@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import useDebounce from "@/hooks/useDebounce";
+import { X } from "lucide-react";
 
 type Props = {
     initialTerm?: string;
@@ -16,13 +17,28 @@ export default function SearchBar({ onSearch, initialTerm = "" }: Props) {
         onSearch(debounced);
     }, [debounced]);
 
+    const handleClear = () => {
+        setSearch("");
+    };
+
     return (
-        <input
-            type="text"
-            placeholder="Search movies..."
-            className="w-full p-3 border rounded-lg shadow"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-        />
+        <div className="relative w-full">
+            <input
+                type="text"
+                placeholder="Search movies..."
+                className="w-full p-3 pr-10 border rounded-lg shadow"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+            />
+            {search && (
+                <button
+                    onClick={handleClear}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-800 cursor-pointer"
+                    aria-label="Clear search"
+                >
+                    <X className="w-5 h-5" />
+                </button>
+            )}
+        </div>
     );
 }

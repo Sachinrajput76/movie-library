@@ -1,5 +1,5 @@
 "use client";
-import { Menu } from "lucide-react";
+import { Clapperboard, Menu } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import Sidebar from "./Sidebar";
@@ -10,15 +10,22 @@ const Header = () => {
     return (
         <>
             <header className="flex items-center justify-between p-4 shadow-md bg-white">
-                <h1 className="text-xl font-bold">🎬 Movie Library</h1>
+                {/* Logo section */}
+                <Link
+                    href="/"
+                    className="flex items-center gap-2 text-xl font-bold cursor-pointer"
+                >
+                    <Clapperboard className="w-6 h-6 text-blue-600" />
+                    <span>Movie Library</span>
+                </Link>
 
-                {/* Desktop Nav */}
+                {/* Nav bar section - Desktop */}
                 <nav className="hidden md:flex gap-4">
                     <Link href="/">Home</Link>
                     <Link href="/favorites">Favorites</Link>
                 </nav>
 
-                {/* Mobile Hamburger */}
+                {/* Hamburger icon - Mobile */}
                 <button
                     className="md:hidden"
                     onClick={() => setSidebarOpen(true)}
@@ -28,7 +35,7 @@ const Header = () => {
                 </button>
             </header>
 
-            {/* Sidebar (Mobile Only) */}
+            {/* Sidebar - For Mobile Only */}
             <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
         </>
     );

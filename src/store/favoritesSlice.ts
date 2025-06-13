@@ -1,18 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-export interface Movie {
-    imdbID: string;
-    Title: string;
-    Year: string;
-    Poster: string;
-}
+import { Movie } from "@/types/movie";
 
 interface FavoritesState {
     movies: Movie[];
+    isLoaded: boolean;
 }
 
 const initialState: FavoritesState = {
     movies: [],
+    isLoaded: false,
 };
 
 const favoritesSlice = createSlice({
@@ -32,6 +28,7 @@ const favoritesSlice = createSlice({
         },
         setFavorites: (state, action: PayloadAction<Movie[]>) => {
             state.movies = action.payload;
+            state.isLoaded = true;
         },
     },
 });

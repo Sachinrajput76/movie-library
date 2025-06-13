@@ -3,6 +3,7 @@ import { RootState } from "@/store";
 import { removeFavorite } from "@/store/favoritesSlice";
 import { Film, Heart } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
+import Image from "next/image";
 
 const FavoritesPage = () => {
     const dispatch = useDispatch();
@@ -27,10 +28,13 @@ const FavoritesPage = () => {
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                 {favorites.map((movie) => (
                     <div key={movie.imdbID} className="bg-white p-2 rounded shadow relative">
-                        <img
-                            src={movie.Poster}
+                        <Image
+                            src={movie.Poster !== "N/A" ? movie.Poster : "/fallback.jpg"}
                             alt={movie.Title}
+                            width={300}
+                            height={400}
                             className="w-full h-64 object-cover rounded"
+                            priority
                         />
                         <div className="mt-2 text-left space-y-1 px-2">
                             <p className="text-sm text-gray-700">

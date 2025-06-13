@@ -6,10 +6,10 @@ import { Film } from "lucide-react";
 export default async function Home({
   searchParams,
 }: {
-  searchParams: { q?: string };
+  searchParams: { find?: string }
 }) {
-  const defaultSearchValue = "Avengers";
-  const searchValue = searchParams?.q || defaultSearchValue;
+  const { find } = await searchParams
+  const searchValue = find || "";
 
   let data = null;
 

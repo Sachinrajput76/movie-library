@@ -23,6 +23,7 @@ const FavoritesPage = () => {
                     <span>Favorite Movies</span>
                 </h1>
             </div>
+
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                 {favorites.map((movie) => (
                     <div key={movie.imdbID} className="bg-white p-2 rounded shadow relative">

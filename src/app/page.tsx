@@ -9,7 +9,7 @@ export default async function Home({
   searchParams: { find?: string };
 }) {
   const defaultSearchValue = "Avengers";
-  const { find } = await searchParams|| defaultSearchValue;
+  const { find } = await searchParams || defaultSearchValue;
   const searchValue = find || "";
 
   let data = null;

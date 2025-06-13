@@ -5,9 +5,5 @@ interface Movie {
     Year: string;
     Poster: string;
 }
-interface HomePageProps {
-    searchParams?: {
-        find?: string;
-    };
-}
-export type { HomePageProps, Movie };
+
+export type { Movie };

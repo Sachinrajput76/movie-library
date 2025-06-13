@@ -9,28 +9,8 @@ import SearchBar from "@/components/SearchBar";
 import { buildSearchUrl } from "@/utils/api";
 import { Search } from "lucide-react";
 
-const MovieCard = dynamic(() => import("@/components/MovieCard"), {
-    loading: () => (
-        <div className="animate-pulse bg-white p-2 rounded shadow">
-            <div className="w-full h-64 bg-gray-200 rounded mb-2" />
-            <div className="space-y-2 px-2">
-                <div className="h-4 bg-gray-300 rounded w-3/4"></div>
-                <div className="h-4 bg-gray-300 rounded w-1/2"></div>
-                <div className="h-4 bg-gray-300 rounded w-1/3"></div>
-            </div>
-        </div>
-    ),
-    ssr: false,
-});
-
-const Pagination = dynamic(() => import("@/components/Pagination"), {
-    loading: () => (
-        <div className="flex justify-center mt-6">
-            <div className="w-48 h-10 bg-gray-200 animate-pulse rounded" />
-        </div>
-    ),
-    ssr: false,
-});
+const MovieCard = dynamic(() => import("@/components/MovieCard"), { ssr: false });
+const Pagination = dynamic(() => import("@/components/Pagination"), { ssr: false });
 
 export default function SearchAndDisplayMovies({ initialData, initialSearchValue }: any) {
     const router = useRouter();
@@ -41,10 +21,14 @@ export default function SearchAndDisplayMovies({ initialData, initialSearchValue
 
     const shouldFetch = searchTerm?.trim() !== "";
 
+    // Update URL param only when term changes
     useEffect(() => {
-        const params = new URLSearchParams(searchParams.toString());
-        params.set("find", searchTerm);
-        router.push(`/?${params.toString()}`);
+        const currentParam = searchParams.get("find") || "";
+        if (searchTerm && searchTerm !== currentParam) {
+            const params = new URLSearchParams(searchParams.toString());
+            params.set("find", searchTerm);
+            router.push(`/?${params.toString()}`);
+        }
     }, [searchTerm]);
 
     const { data, isFetching } = useQuery({

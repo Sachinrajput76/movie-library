@@ -6,10 +6,12 @@ import { Film } from "lucide-react";
 export default async function Home({
   searchParams,
 }: {
-  searchParams: { find?: string }
+  searchParams: { find?: string };
 }) {
-  const { find } = await searchParams
-  const searchValue = find || "";
+  const defaultSearchValue = "Avengers";
+  const { find } = await searchParams || defaultSearchValue;
+  const searchValue = find?.trim() || "Avengers";
+
 
   let data = null;
 
@@ -24,7 +26,6 @@ export default async function Home({
       data: error?.response?.data,
     });
 
-    // Provide fallback data to avoid crash
     data = {
       Response: "False",
       Search: [],

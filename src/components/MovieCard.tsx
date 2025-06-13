@@ -22,6 +22,7 @@ const MovieCard = ({ movie }: { movie: any }) => {
                 alt={movie.Title}
                 width={300}
                 height={450}
+                priority
                 className="w-full h-64 object-cover rounded"
             />
 

@@ -12,15 +12,11 @@ type Props = {
 
 export default function SearchBar({ onSearch, initialSearchValue = "" }: Props) {
     const searchParams = useSearchParams();
-    const paramSearchValue = searchParams.get("find") || initialSearchValue;
-
-    const [search, setSearch] = useState(paramSearchValue);
+    const paramValue = searchParams.get("find");
+    const [search, setSearch] = useState(paramValue || initialSearchValue);
     const debounced = useDebounce(search, 500);
 
-    useEffect(() => {
-        setSearch(paramSearchValue);
-    }, [paramSearchValue]);
-
+    // Trigger onSearch after debounce
     useEffect(() => {
         onSearch(debounced);
     }, [debounced]);

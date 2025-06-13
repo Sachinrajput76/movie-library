@@ -8,8 +8,7 @@ export default async function Home({
 }: {
   searchParams: { find?: string };
 }) {
-  const defaultSearchValue = "Avengers";
-  const { find } = await searchParams || defaultSearchValue;
+  const { find } = searchParams || {};
   const searchValue = find?.trim() || "Avengers";
 
 

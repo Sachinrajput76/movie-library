@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store";
 import { addFavorite, removeFavorite } from "@/store/favoritesSlice";
 import { Heart } from "lucide-react";
-import clsx from "clsx"; // optional utility for cleaner class handling
 
 const MovieCard = ({ movie }: { movie: any }) => {
     const dispatch = useDispatch();
@@ -38,15 +37,12 @@ const MovieCard = ({ movie }: { movie: any }) => {
                 </p>
             </div>
 
-
             <button
                 onClick={toggleFavorite}
-                className={clsx(
-                    "absolute top-2 right-2 transition-colors cursor-pointer",
-                    isFav
-                        ? "text-red-600 border-red-600"
-                        : "text-white border-gray-300 bg-black/30 hover:border-gray-500"
-                )}
+                className={`absolute top-2 right-2 transition-colors cursor-pointer p-1 ${isFav
+                    ? "text-red-600 border-red-600"
+                    : "text-white border-gray-300 bg-black/30 hover:border-gray-500"
+                    }`}
                 title={isFav ? "Remove from favorites" : "Add to favorites"}
             >
                 <Heart fill={isFav ? "red" : "white"} className="w-6 h-6" />

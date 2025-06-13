@@ -32,7 +32,7 @@ const FavoritesPage = () => {
                         </div>
                         <button
                             onClick={() => handleRemove(movie.imdbID)}
-                            className={"absolute top-2 right-2 transition-colors text-red-600 border-red-600"
+                            className={"cursor-pointer absolute top-2 right-2 transition-colors text-red-600 border-red-600"
                             }
 
                         >

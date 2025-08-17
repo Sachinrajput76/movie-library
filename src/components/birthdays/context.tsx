@@ -31,23 +31,23 @@ export function BirthdayProvider({ children }: { children: React.ReactNode }) {
     useEffect(() => {
         const saved = loadAll();
         if (saved.length === 0) {
-            setProfiles([
-                {
-                    id: "1", name: "Sachin Kumar", dob: "1992-08-17", category: "Friends",
-                    isPublic: false,
-                    notes: []
-                },
-                {
-                    id: "2", name: "Elon Musk", dob: "1971-06-28", category: "Friends",
-                    isPublic: false,
-                    notes: []
-                },
-                {
-                    id: "3", name: "Steve Jobs", dob: "1955-02-24", category: "Legends",
-                    isPublic: false,
-                    notes: []
-                },
-            ]);
+            // setProfiles([
+            //     {
+            //         id: "1", name: "Sachin Kumar", dob: "1992-08-17", category: "Friends",
+            //         isPublic: false,
+            //         notes: []
+            //     },
+            //     {
+            //         id: "2", name: "Elon Musk", dob: "1971-06-28", category: "Friends",
+            //         isPublic: true,
+            //         notes: []
+            //     },
+            //     {
+            //         id: "3", name: "Steve Jobs", dob: "1955-02-24", category: "Legends",
+            //         isPublic: false,
+            //         notes: []
+            //     },
+            // ]);
         } else {
             setProfiles(saved);
         }

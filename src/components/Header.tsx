@@ -23,6 +23,7 @@ const Header = () => {
                 <nav className="hidden md:flex gap-4">
                     <Link href="/">Home</Link>
                     <Link href="/favorites">Favorites</Link>
+                    <Link href="/birthdays">Birthdays</Link>
                 </nav>
 
                 {/* Hamburger icon - Mobile */}

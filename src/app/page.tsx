@@ -8,9 +8,12 @@ export default async function Home({
 }: {
   searchParams: { find?: string };
 }) {
+
   const defaultSearchValue = "Avengers";
-  const { find } = await searchParams || defaultSearchValue;
-  const searchValue = find || "";
+
+  const searchValue = searchParams?.find || defaultSearchValue;
+
+
 
   let data = null;
 
@@ -18,12 +21,16 @@ export default async function Home({
     const response = await axios.get(buildSearchUrl(searchValue));
     data = response.data;
   } catch (error: any) {
-    console.error("Error fetching initial data:", {
-      message: error?.message,
-      status: error?.response?.status,
-      url: buildSearchUrl(searchValue),
-      data: error?.response?.data,
-    });
+    if (axios.isAxiosError(error)) {
+      console.error("Axios error fetching initial data:", {
+        message: error.message,
+        status: error.response?.status,
+        url: buildSearchUrl(searchValue),
+        data: error.response?.data,
+      });
+    } else {
+      console.error("Unexpected error fetching initial data:", error);
+    }
 
     data = {
       Response: "False",
@@ -32,6 +39,7 @@ export default async function Home({
       Error: "Failed to load data. Please try again later.",
     };
   }
+
 
   return (
     <main className="max-w-4xl mx-auto p-4">

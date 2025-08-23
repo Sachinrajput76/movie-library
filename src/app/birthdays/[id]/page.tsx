@@ -23,8 +23,8 @@ export default function BirthdayProfilePage({
     const { id } = React.use(params);
     const [p, setP] = useState<Profile | null>(null);
     const [note, setNote] = useState("");
-    const audioRef = useRef<HTMLAudioElement>(null);
 
+    const audioRef = useRef<HTMLAudioElement>(null);
     const globalTheme = loadGlobalTheme();
 
     useEffect(() => {
@@ -114,7 +114,10 @@ export default function BirthdayProfilePage({
                 {/* Audio Row */}
                 {p.audioDataUrl && (
                     <div>
-                        <AudioPlayer src={p.audioDataUrl} audioRef={audioRef} />
+                        <AudioPlayer
+                            src={p.audioDataUrl}
+                            audioRef={audioRef as React.RefObject<HTMLAudioElement>}
+                        />
                     </div>
                 )}
                 {/* Notes Section */}

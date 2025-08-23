@@ -6,17 +6,15 @@ import { Film } from "lucide-react";
 export default async function Home({
   searchParams,
 }: {
-  searchParams: { find?: string };
+  searchParams: Promise<{ find?: string }>;
 }) {
+  // Await the searchParams promise
+  const { find } = await searchParams;
 
   const defaultSearchValue = "Avengers";
-
-  const searchValue = searchParams?.find || defaultSearchValue;
-
-
+  const searchValue = find || defaultSearchValue;
 
   let data = null;
-
   try {
     const response = await axios.get(buildSearchUrl(searchValue));
     data = response.data;
@@ -31,7 +29,6 @@ export default async function Home({
     } else {
       console.error("Unexpected error fetching initial data:", error);
     }
-
     data = {
       Response: "False",
       Search: [],
@@ -39,7 +36,6 @@ export default async function Home({
       Error: "Failed to load data. Please try again later.",
     };
   }
-
 
   return (
     <main className="max-w-4xl mx-auto p-4">
@@ -49,7 +45,6 @@ export default async function Home({
           <span>Movies</span>
         </h1>
       </div>
-
       <SearchAndDisplayMovies
         initialData={data}
         initialSearchValue={searchValue}

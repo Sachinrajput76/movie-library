@@ -8,7 +8,7 @@ import {
     groupNotesByYear,
     nextBirthdayDate,
 } from "@/utils/birthdays/helpers";
-import { themeStyle, loadGlobalTheme } from "@/utils/birthdays/themes";
+import { themeStyle, loadGlobalTheme, ThemeKey } from "@/utils/birthdays/themes"; // Import ThemeKey type
 import NotesHistory from "@/components/birthdays/NotesHistory";
 import ShareButtons from "@/components/birthdays/ShareButtons";
 import PrivacyBadge from "@/components/birthdays/PrivacyBadge";
@@ -21,7 +21,6 @@ export default function BirthdayProfilePage({
 }) {
     // ✅ unwrap params using React.use
     const { id } = React.use(params);
-
     const [p, setP] = useState<Profile | null>(null);
     const [note, setNote] = useState("");
     const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -31,7 +30,12 @@ export default function BirthdayProfilePage({
         setP(getById(id) ?? null);
     }, [id]);
 
-    const cardTheme = useMemo(() => p?.theme || globalTheme, [p, globalTheme]);
+    // Fix: Ensure cardTheme is of type ThemeKey | undefined
+    const cardTheme = useMemo<ThemeKey | undefined>(() => {
+        const theme = p?.theme || globalTheme;
+        // Convert to lowercase to match ThemeKey type if needed
+        return theme?.toLowerCase() as ThemeKey;
+    }, [p, globalTheme]);
 
     if (!p) {
         return (
@@ -56,7 +60,6 @@ export default function BirthdayProfilePage({
         };
         const updated = { ...p, notes: [yn, ...(p.notes || [])] };
         setP(updated);
-
         // persist to localStorage
         const all = JSON.parse(
             localStorage.getItem("birthday_profiles_v1") || "[]"
@@ -72,7 +75,7 @@ export default function BirthdayProfilePage({
     return (
         <main
             className="min-h-screen flex justify-center items-start bg-gray-100 p-6"
-            style={themeStyle(cardTheme)}
+            style={themeStyle(cardTheme)} // Now cardTheme is of type ThemeKey | undefined
         >
             <div className="w-full max-w-3xl bg-white shadow-lg rounded-lg p-6 space-y-6">
                 {/* Header */}
@@ -91,7 +94,6 @@ export default function BirthdayProfilePage({
                             </div>
                         )}
                     </div>
-
                     {/* Meta */}
                     <div className="flex-1">
                         <div className="flex items-center gap-2">
@@ -103,26 +105,22 @@ export default function BirthdayProfilePage({
                             {formatDate(nextBirthdayDate(p.dob))}
                         </p>
                         <p className="text-gray-500 mt-1">Category: {p.category}</p>
-
                         <div className="mt-3">
                             <ShareButtons profile={p} />
                         </div>
                     </div>
                 </div>
-
                 {/* Audio Row */}
                 {p.audioDataUrl && (
                     <div>
                         <AudioPlayer src={p.audioDataUrl} audioRef={audioRef} />
                     </div>
                 )}
-
                 {/* Notes Section */}
                 <section>
                     <h2 className="text-xl font-semibold mb-3">
                         📒 Notes & Memories
                     </h2>
-
                     {/* Add Note */}
                     <div className="space-y-3 mb-6">
                         <textarea
@@ -138,7 +136,6 @@ export default function BirthdayProfilePage({
                             Add Note
                         </button>
                     </div>
-
                     {/* Notes History */}
                     <NotesHistory groups={groupNotesByYear(p.notes || [])} />
                 </section>

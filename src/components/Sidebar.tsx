@@ -33,6 +33,7 @@ const Sidebar = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) 
                 <nav className="flex flex-col gap-4">
                     <Link href="/" onClick={onClose}>Home</Link>
                     <Link href="/favorites" onClick={onClose}>Favorites</Link>
+                    <Link href="/birthdays" onClick={onClose}>Birthdays</Link>
                 </nav>
             </div>
         </div>

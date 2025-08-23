@@ -4,7 +4,7 @@ import { Profile } from "@/utils/birthdays/types";
 import { ageOnDate, formatDate, nextBirthdayDate } from "@/utils/birthdays/helpers";
 import ShareButtons from "./ShareButtons";
 import PrivacyBadge from "./PrivacyBadge";
-import { themeStyle } from "@/utils/birthdays/themes";
+import { themeVars } from "@/utils/birthdays/themes";
 
 export default function BirthdayCard({
     profile,
@@ -15,10 +15,12 @@ export default function BirthdayCard({
 }) {
     const nb = nextBirthdayDate(profile.dob);
 
+    // Pick theme styles from themeVars
+    const theme = profile.theme ? themeVars[profile.theme] : themeVars["Confetti"];
+
     return (
         <li
-            className="relative flex flex-col gap-4 p-4 rounded-lg shadow bg-white dark:bg-gray-800"
-            style={themeStyle(profile.theme)}
+            className={`relative flex flex-col gap-4 p-4 rounded-lg shadow ${theme.bg} ${theme.text}`}
         >
             {/* Clickable overlay link */}
             <Link href={`/birthdays/${profile.id}`} className="absolute inset-0 z-0" />
@@ -42,11 +44,11 @@ export default function BirthdayCard({
                     <h3 className="text-lg font-semibold">{profile.name}</h3>
                     <PrivacyBadge isPublic={profile.isPublic} />
                 </div>
-                <p className="text-sm text-gray-500">
+                <p className="text-sm">
                     🎂 {new Date(profile.dob).toLocaleDateString()} · turns{" "}
                     {ageOnDate(profile.dob, nb) + 1} on {formatDate(nb)}
                 </p>
-                <p className="text-sm text-gray-500">Category: {profile.category}</p>
+                <p className="text-sm">Category: {profile.category}</p>
             </div>
 
             {/* Actions */}

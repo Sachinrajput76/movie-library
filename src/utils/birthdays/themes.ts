@@ -13,7 +13,7 @@ export type ThemeKey =
     | "Sunrise";
 
 
-export const themeKeys: ThemeKey[] = ["Confetti", "Minimal", "Dark"];
+export const themeKeys: ThemeKey[] = ["Confetti", "Minimal", "Dark", "Balloon", "Cupcake", "Neon", "Classic", "Midnight", "Sunrise"];
 
 export const themeVars: Record<ThemeKey, { bg: string; text: string }> = {
     Confetti: { bg: "bg-gradient-to-r from-pink-300 to-yellow-200", text: "text-black" },

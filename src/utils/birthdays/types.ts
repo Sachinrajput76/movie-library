@@ -1,12 +1,11 @@
-export type Category = "Family" | "Relatives" | "Friends" | "Important" | "Legends" | "Others";
+import { ThemeKey } from "./themes";
 
 export type YearNote = {
     year: number;
     text: string;
     createdAt: string; // ISO
 };
-
-export type ThemeKey = "Confetti" | "Balloon" | "Cupcake" | "Neon" | "Classic" | "Midnight" | "Sunrise";
+export type Category = "Family" | "Relatives" | "Friends" | "Important" | "Legends" | "Others";
 
 export type Profile = {
     id: string;

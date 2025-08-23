@@ -1,6 +1,17 @@
 // src/utils/birthdays/themes.ts
 
-export type ThemeKey = "Confetti" | "Minimal" | "Dark";
+
+export type ThemeKey =
+    | "Confetti"
+    | "Minimal"
+    | "Dark"
+    | "Balloon"
+    | "Cupcake"
+    | "Neon"
+    | "Classic"
+    | "Midnight"
+    | "Sunrise";
+
 
 export const themeKeys: ThemeKey[] = ["Confetti", "Minimal", "Dark"];
 
@@ -8,6 +19,12 @@ export const themeVars: Record<ThemeKey, { bg: string; text: string }> = {
     Confetti: { bg: "bg-gradient-to-r from-pink-300 to-yellow-200", text: "text-black" },
     Minimal: { bg: "bg-gray-100", text: "text-gray-800" },
     Dark: { bg: "bg-gray-900", text: "text-white" },
+    Balloon: { bg: "bg-blue-200", text: "text-blue-900" },
+    Cupcake: { bg: "bg-pink-200", text: "text-pink-900" },
+    Neon: { bg: "bg-green-200", text: "text-green-900" },
+    Classic: { bg: "bg-yellow-100", text: "text-yellow-900" },
+    Midnight: { bg: "bg-indigo-900", text: "text-white" },
+    Sunrise: { bg: "bg-orange-200", text: "text-orange-900" },
 };
 
 const THEME_KEY = "birthday_global_theme_v1";

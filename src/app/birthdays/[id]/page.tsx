@@ -23,7 +23,8 @@ export default function BirthdayProfilePage({
     const { id } = React.use(params);
     const [p, setP] = useState<Profile | null>(null);
     const [note, setNote] = useState("");
-    const audioRef = useRef<HTMLAudioElement | null>(null);
+    const audioRef = useRef<HTMLAudioElement>(null);
+
     const globalTheme = loadGlobalTheme();
 
     useEffect(() => {
